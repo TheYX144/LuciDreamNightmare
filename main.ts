@@ -1,11 +1,14 @@
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    game.over(false, effects.confetti)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    game.over(false, effects.confetti)
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     Dreamy.vy = -200
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
-    game.over(false, effects.dissolve)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    game.over(false, effects.dissolve)
+info.onCountdownEnd(function () {
+    game.over(true)
 })
 let projectile: Sprite = null
 let Dreamy: Sprite = null
@@ -54,6 +57,7 @@ Dreamy.setPosition(43, 109)
 Demon.setPosition(127, 105)
 Dreamy.ay = 600
 controller.moveSprite(Dreamy, 100, 0)
+info.startCountdown(60)
 game.onUpdateInterval(3000, function () {
     projectile = sprites.createProjectileFromSprite(img`
         . . . . . . . . . . . . . . . . 
